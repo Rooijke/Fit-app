@@ -1,0 +1,34 @@
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    height: 100%;
+    width: 100%;
+    background-color: #111827;
+    color: #E5E7EB !important;
+}
+h1{
+    font-size: 30px !important;
+}
+h2{
+    font-size: 25px !important;
+}
+h3{
+    font-size: 20px !important;
+}
+h4{
+    font-size: 15px !important;
+}
+h5{
+    font-size: 10px !important;
+}
+
+.fit-content{
+    width: fit-content !important;
+}
+
+.negative-margin{
+    margin-bottom: -1.5em !important;
+}
+
+.fit-app-blue{
+    color: #111827 !important;
+}
