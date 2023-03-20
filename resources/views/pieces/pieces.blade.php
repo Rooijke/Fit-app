@@ -25,12 +25,10 @@
 
                                     <select name="type" id="type" class="mt-3 fit-app-blue rounded-md border-gray-300 dark:border-gray-700 shadow-sm">
                                         <option>Clothing type</option>
-                                        <option value="shirt">Shirt</option>
-                                        <option value="pants">Pants</option>
+                                        <option value="headwear">headwear</option>
+                                        <option value="tops">Tops</option>
+                                        <option value="bottoms">Bottoms</option>
                                         <option value="shoes">Shoes</option>
-                                        <option value="jacket">Jacket</option>
-                                        <option value="sweater">Sweater</option>
-                                        <option value="hoodie">Hoodie</option>
                                         <option value="accessoires">Accessoires</option>
                                     </select>
 
@@ -48,7 +46,7 @@
                 @foreach($pieces as $piece)
                     <div class="bg-white w-full rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <img class="rounded-t-lg" src="{{ asset('storage/' . $piece->image) }}" alt="{{$piece->image}}" />
+                            <img class="rounded-t-lg" src="{{ asset('storage/images/' . $piece->image) }}" alt="{{$piece->image}}" />
                         </a>
                         <div class="p-5 ">
                             <h2 class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-white">{{$piece->name}}</h2>

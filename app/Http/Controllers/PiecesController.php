@@ -35,30 +35,57 @@ class PiecesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
+//    public function store(Request $request)
+//    {
+//
+//        Piece::create([
+//            'brand_name' => $request->brand_name,
+//            'description' => $request->description,
+//            'type' => $request->type,
+//            'name' => $request->name,
+//            'image' => $request->image,
+//        ]);
+//
+//        if($request->hasFile('image')){
+//            $file = $request->file('image'); // Get the uploaded file
+//            $filename = $file->getClientOriginalName(); // Get the original filename
+//            $filename = str_replace(' ', '_', $filename); // Replace spaces with underscores
+//            Storage::disk('image_disk')->put($filename, File::get($file)); // Store the file on the disk
+//        }
+//
+//        return redirect()->back()->with(['message', 'Piece created successfully!']);
+//    }
+
     public function store(Request $request)
     {
-
-        Piece::create([
-            'brand_name' => $request->brand_name,
-            'description' => $request->description,
-            'type' => $request->type,
-            'name' => $request->name,
-            'image' => $request->image,
+        $validatedData = $request->validate([
+            'brand_name' => 'required|max:255',
+            'description' => 'required',
+            'type' => 'required|max:255',
+            'name' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            
-            $filename = $image->getClientOriginalName();
-            $filename = str_replace(' ', '_', $filename);
+        $piece = new Piece();
+        $piece->brand_name = $validatedData['brand_name'];
+        $piece->description = $validatedData['description'];
+        $piece->type = $validatedData['type'];
+        $piece->name = $validatedData['name'];
 
-            Storage::disk('public')->put($filename, File::get($image));
+        if($request->hasFile('image')){
+            $file = $request->file('image'); // Get the uploaded file
+            $filename = $file->getClientOriginalName(); // Get the original filename
+            $filename = str_replace(' ', '_', $filename); // Replace spaces with underscores
+            Storage::disk('public')->put('images/'.$filename, File::get($file)); // Store the file on the disk
+            $piece->image = $filename;
         }
 
+        $piece->save();
+
         return redirect()->back()->with(['message', 'Piece created successfully!']);
-
     }
-
 
     /**
      * Display the specified resource.
